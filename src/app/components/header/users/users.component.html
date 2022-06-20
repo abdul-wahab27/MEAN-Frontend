@@ -1,0 +1,23 @@
+<div class="container"><button class="btn btn-warning" routerLink="/" (click)="logout()">Logout</button></div><br>
+<div class="container"> <button class="btn btn-primary" routerLink="/signup">Add</button></div>
+<div class="container">
+
+  <h1>Users List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of Users; let i=index">
+
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td><button class ='btn btn-danger' (click)="deleteUser(i,Users._id)">Delete</button></td>
+    </tbody>
+  </table>
+
+  <p>Back to <button class="btn btn-link" routerLink="/notes">Notes</button></p>
+</div>

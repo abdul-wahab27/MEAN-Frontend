@@ -1,0 +1,65 @@
+<!-- Logout Button -->
+<div class="container"><button class="btn btn-warning" routerLink="/" (click)="logout()">Logout</button></div>
+
+<!-- Edit Mode -->
+<div class="container" *ngIf="editNoteForm">
+  <form #noteForm="ngForm">
+    <label for="title">Title</label>
+    <input type="string" [ngModel]="note.title" name="title" required placeholder="Enter title of note"
+      class="form-control">
+    <label for="content">Content</label>
+    <input type="string" [ngModel]="note.content" name="content" required placeholder="Enter Content"
+      class="form-control"><br>
+    <button class="btn btn-success" (click)="update(note,noteForm.form.value)">Update</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="reset(noteForm)">Cancel</button>
+  </form>
+</div>
+
+<!-- Add Notes -->
+<div class="container" *ngIf="!editNoteForm">
+  <form #noteForm="ngForm" (ngSubmit)="onSubmit(noteForm.value)">
+    <label for="title">
+      <h3>Title</h3>
+    </label>
+    <input type="string" [(ngModel)]="note.title" name="title" required placeholder="Enter title of note"
+      class="form-control">
+    <label for="content">
+      <h3>Content</h3>
+    </label>
+    <input type="string" [(ngModel)]="note.content" name="content" required placeholder="Enter Content"
+      class="form-control"><br>
+    <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid">Add</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="reset(noteForm)">Reset</button>&nbsp;
+  </form>
+</div>
+
+<!-- Notes Table -->
+<div class="container py-3">
+  <table class="table table-bordered">
+    <thead>
+      <td>Sr. No</td>
+      <td>Title</td>
+      <td>Content</td>
+      <td>Delete</td>
+      <td>Update</td>
+    </thead>
+    <tbody *ngFor="let note of Notes; let i =index">
+      <td>{{i +1}}</td>
+      <td>{{note.title}}</td>
+      <td>{{note.content}}</td>
+      <td><button class="btn btn-danger" (click)="onDelete(note._id,i)">Delete</button></td>
+      <td><button class="btn btn-secondary" (click)="onUpdateSave(note)">Edit</button></td>
+    </tbody>
+  </table>
+
+<!-- Time and Date -->
+<p>The time is {{today | date:'medium'}}</p>
+</div>
+
+
+
+
+
+
+
+
